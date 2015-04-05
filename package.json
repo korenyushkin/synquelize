@@ -7,10 +7,28 @@
     "fibers": "^1.0.5",
     "sequelize": "^2.0.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "sqlite3": "^3.0.5"
+  },
+  "engines": {
+    "node": ">=0.6.21"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "repository" : {
+    "type" : "git"
+  , "url" : "http://github.com/korenyushkin/synquelize.git"
+  },
+  "author": {
+    "name": "Anton Korenyushkin",
+    "email": "korenyushkin@gmail.com"
+  },
+  "contributors": [
+    {
+      "name": "Oleg Podsechin",
+      "email": "oleg@ionsquare.com"
+    }
+  ],
   "license": "MIT"
 }
