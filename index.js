@@ -45,9 +45,13 @@ function wrapMethod(method) {
     if (!(ret instanceof Promise))
       return wrapValue(ret);
     var fiber = Fiber.current;
-    ret.then(function (value) {
-      fiber.run(value);
-    });
+    ret.then(
+      function (value) {
+        fiber.run(value);
+      },
+      function (err) {
+       fiber.throwInto(err);
+     });
     return wrapValue(Fiber.yield());
   }
 }

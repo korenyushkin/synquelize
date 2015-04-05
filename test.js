@@ -1,5 +1,6 @@
 var assert = require('assert');
 var Synquelize = require('./index');
+var Sequelize = require('sequelize');
 
 var userNames = ['John', 'Bill'];
 var surname = ' Jackson';
@@ -12,7 +13,8 @@ describe('Synquelize', function () {
     User = synquelize.define('user', {
       name: {
         type: Synquelize.STRING,
-        field: 'name'
+        field: 'name',
+        unique: true
       }
     });
     User.sync({force: true});
@@ -20,6 +22,7 @@ describe('Synquelize', function () {
   });
 
   it('must create and update instances', function () {
+    assert.equal(User.findOne({where: {name: userNames[0]}}).name, userNames[0]);
     var users = User.findAll();
     assert.equal(users.length, userNames.length);
     for (var i = 0; i < users.length; ++i) {
@@ -28,5 +31,15 @@ describe('Synquelize', function () {
       users[i].save();
       assert.equal(users[i].name, userNames[i] + surname);
     }
+  });
+
+  it('must throw errors', function () {
+    var NoSuch = synquelize.define('no_such_table', {});
+    assert.throws(
+      function () { NoSuch.findAll(); },
+      Sequelize.DatabaseError);
+    assert.throws(
+      function () { User.create({name: userNames[0]}); },
+      Sequelize.UniqueConstraintError);
   });
 });
