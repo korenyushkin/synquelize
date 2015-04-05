@@ -15,20 +15,18 @@ describe('Synquelize', function () {
         field: 'name'
       }
     });
+    User.sync({force: true});
+    userNames.forEach(function (name) { User.create({name: name}); });
   });
 
   it('must create and update instances', function () {
-    Synquelize.run(function () {
-      User.sync({force: true});
-      userNames.forEach(function (name) { User.create({name: name}); });
-      var users = User.findAll();
-      assert.equal(users.length, userNames.length);
-      for (var i = 0; i < users.length; ++i) {
-        assert.equal(users[i].name, userNames[i]);
-        user[i].name += surname;
-        user.save();
-        assert.equal(user[i].name, userNames[i] + surname);
-      }
-    });
+    var users = User.findAll();
+    assert.equal(users.length, userNames.length);
+    for (var i = 0; i < users.length; ++i) {
+      assert.equal(users[i].name, userNames[i]);
+      users[i].name += surname;
+      users[i].save();
+      assert.equal(users[i].name, userNames[i] + surname);
+    }
   });
 });

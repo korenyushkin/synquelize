@@ -9,17 +9,18 @@
   },
   "devDependencies": {
     "mocha": "^2.2.1",
+    "mocha-fibers": "^1.1.0",
     "sqlite3": "^3.0.5"
   },
   "engines": {
     "node": ">=0.6.21"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --ui mocha-fibers test.js"
   },
-  "repository" : {
-    "type" : "git"
-  , "url" : "http://github.com/korenyushkin/synquelize.git"
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/korenyushkin/synquelize.git"
   },
   "author": {
     "name": "Anton Korenyushkin",
