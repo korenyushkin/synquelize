@@ -1,6 +1,6 @@
 {
   "name": "synquelize",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Sync wrapper for Sequelize",
   "main": "index.js",
   "dependencies": {
