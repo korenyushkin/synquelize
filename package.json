@@ -8,13 +8,14 @@
     "sequelize": "^2.0.3"
   },
   "devDependencies": {
+    "mocha": "^2.2.1",
     "sqlite3": "^3.0.5"
   },
   "engines": {
     "node": ">=0.6.21"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository" : {
     "type" : "git"

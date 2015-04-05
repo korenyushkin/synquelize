@@ -1,23 +1,34 @@
+var assert = require('assert');
 var Synquelize = require('./index');
 
-var synquelize = new Synquelize('test.db', '', '', {dialect: 'sqlite'});
-var User = synquelize.define('user', {
-  name: {
-    type: Synquelize.STRING,
-    field: 'name'
-  }
-});
+var userNames = ['John', 'Bill'];
+var surname = ' Jackson';
 
-Synquelize.run(function () {
-  User.sync({force: true});
-  User.create({name: 'John'});
-  User.create({name: 'Bill'});
-  var users = User.findAll();
-  for (var i = 0; i < users.length; ++i) {
-    var user = users[i];
-    console.log(user.name);
-    user.name = user.name + ' Jackson';
-    user.save();
-    console.log(user.name);
-  }
+describe('Synquelize', function () {
+  var synquelize, User;
+
+  beforeEach(function () {
+    synquelize = new Synquelize('test.db', '', '', {dialect: 'sqlite'});
+    User = synquelize.define('user', {
+      name: {
+        type: Synquelize.STRING,
+        field: 'name'
+      }
+    });
+  });
+
+  it('must create and update instances', function () {
+    Synquelize.run(function () {
+      User.sync({force: true});
+      userNames.forEach(function (name) { User.create({name: name}); });
+      var users = User.findAll();
+      assert.equal(users.length, userNames.length);
+      for (var i = 0; i < users.length; ++i) {
+        assert.equal(users[i].name, userNames[i]);
+        user[i].name += surname;
+        user.save();
+        assert.equal(user[i].name, userNames[i] + surname);
+      }
+    });
+  });
 });
